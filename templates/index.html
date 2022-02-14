@@ -7,6 +7,9 @@
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
 </head>
 <body>
-
+    <h1>{{ message }}</h1>
+    <form action="{{ url_for('logout') }}">
+        <button type="submit">LOGOUT</button>
+    </form>
 </body>
 </html>
