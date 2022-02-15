@@ -6,15 +6,16 @@ function initGame() {
 function createBoard(){
     let center = document.createElement('center');
     let Board = document.createElement('table');
-    let counter = 0;
+    let rowCounter = 0;
     for (let i = 0; i < 15; i++) {
         let tr = document.createElement('tr');
-
+        tr.dataset.row = rowCounter.toString();
+        let colCounter = 0;
         for (let j = 0; j < 15; j++) {
-
             let td = document.createElement('td');
-            td.setAttribute('id', counter)
-            counter++;
+            td.dataset.row = rowCounter.toString();
+            td.dataset.col = colCounter.toString();
+            colCounter++;
             if ((i + j) % 2 === 0) {
                 td.setAttribute('class', 'cell mediumseagreen-cell');
                 tr.appendChild(td);
@@ -22,7 +23,7 @@ function createBoard(){
                 td.setAttribute('class', 'cell lightgreen-cell');
                 tr.appendChild(td);
             }
-        }
+        }rowCounter++;
         Board.appendChild(tr);
     }
     center.appendChild(Board);
