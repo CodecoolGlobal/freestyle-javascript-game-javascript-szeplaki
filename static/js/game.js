@@ -32,5 +32,15 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
+    drop_apple_on_board(Board)
 }
 initGame();
+
+
+function drop_apple_on_board(Board){
+    const rnd_col = Math.floor(Math.random() * 14) + 0;
+    const rnd_row = Math.floor(Math.random() * 14) + 0;
+    console.log(rnd_col, rnd_row)
+    Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
+    return Board
+}
