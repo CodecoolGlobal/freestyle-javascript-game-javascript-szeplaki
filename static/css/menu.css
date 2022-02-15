@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+
+}
+
+.main-menu {
+
+    display: grid;
+    justify-content: center;
+    position: relative;
+    width: 20rem;
+    left: 30rem;
+    top: 10rem;
+    border: 3px solid white;
+
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    color: white;
+    border: 1px solid white;
+
+}
