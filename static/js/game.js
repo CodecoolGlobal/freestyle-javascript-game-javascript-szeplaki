@@ -1,5 +1,4 @@
 function initGame() {
-<<<<<<< HEAD
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
@@ -10,10 +9,7 @@ function initGame() {
     createBoard()
     initSnake(snake)
     setInterval(startGame, 2000)
-
-=======
     createMenu();
->>>>>>> 9327ad58a68d231129e0255bdff79dc3d960e62c
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 
