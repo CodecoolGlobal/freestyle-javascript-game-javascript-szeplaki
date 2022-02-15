@@ -10,6 +10,10 @@ function initGame() {
     initSnake(snake)
     setInterval(startGame, 2000)
     createMenu();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 253ffb923f4204bd53a85620c61ff07439cddc0a
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 
@@ -18,7 +22,6 @@ function initSnake(snake) {
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
         document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-tail');
 }
-
 
 function startGame() {
     let snakeSpeed = 1;
@@ -73,6 +76,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
+    drop_apple_on_board(Board)
 }
 
 function createMenu(){
@@ -142,3 +146,12 @@ function displayCredit(){
     document.body.appendChild(pTag2);
 }
 initGame();
+
+
+function drop_apple_on_board(Board){
+    const rnd_col = Math.floor(Math.random() * 14) + 0;
+    const rnd_row = Math.floor(Math.random() * 14) + 0;
+    console.log(rnd_col, rnd_row)
+    Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
+    return Board
+}
