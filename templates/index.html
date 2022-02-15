@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
+    <link rel="stylesheet" href="/static/css/menu.css">
 </head>
 <body>
-    <h1>{{ message }}</h1>
-    <form action="{{ url_for('logout') }}">
-        <button type="submit">LOGOUT</button>
-    </form>
+    <div class="main-menu">
+        <div class="menu">
+            START GAME
+        </div>
+        <div class="menu">
+            RANKINGS
+        </div>
+        <div class="menu">
+            CREDITS
+        </div>
+    </div>
+    <div class="logout">
+        <form action="{{ url_for('logout') }}">
+            <button type="submit" id="btn">LOGOUT</button>
+        </form>
+    </div>
 </body>
 </html>
