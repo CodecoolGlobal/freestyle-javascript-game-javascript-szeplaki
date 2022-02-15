@@ -16,7 +16,8 @@
 }
 
 .snake-head,
-.snake {
+.snake,
+.snake-tail {
     background-color: darkblue;
 }
 

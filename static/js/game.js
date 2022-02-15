@@ -2,7 +2,9 @@ function initGame() {
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
-    let snake = [107, 106, 105]
+    let snake = [getSnakeCoordinates(7, 0),
+                getSnakeCoordinates(7, 1),
+                getSnakeCoordinates(7, 2)]
 
     createBoard()
     initSnake(snake)
@@ -12,9 +14,9 @@ function initGame() {
 }
 
 function initSnake(snake) {
-        document.getElementById(`${snake[0]}`).classList.add('snake-head');
-        document.getElementById(`${snake[1]}`).classList.add('snake');
-        document.getElementById(`${snake[2]}`).classList.add('snake-tail');
+        document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-head');
+        document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
+        document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-tail');
 }
 
 
@@ -25,8 +27,11 @@ function startGame() {
     interval = setInterval(moveSnake, intervalTime);
 }
 
+function getSnakeCoordinates(row, col) {
+    return {row:row, col:col}
+}
+
 function moveSnake() {
-    console.log('1 round')
     let head = document.getElementsByClassName('snake-head');
     let tail = document.getElementsByClassName('snake-tail');
     head.className.remove('snake-head');
@@ -42,14 +47,16 @@ function moveSnake() {
 function createBoard(){
     let center = document.createElement('center');
     let Board = document.createElement('table');
-    let row = 0;
-    let col = 0;
+    let rowCounter = 0;
     for (let i = 0; i < 15; i++) {
         let tr = document.createElement('tr');
+        tr.dataset.row = rowCounter.toString();
+        let colCounter = 0;
         for (let j = 0; j < 15; j++) {
             let td = document.createElement('td');
-            td.setAttribute('id', col)
-            col++;
+            td.dataset.row = rowCounter.toString();
+            td.dataset.col = colCounter.toString();
+            colCounter++;
             if ((i + j) % 2 === 0) {
                 td.setAttribute('class', 'cell mediumseagreen-cell');
                 tr.appendChild(td);
@@ -57,7 +64,7 @@ function createBoard(){
                 td.setAttribute('class', 'cell lightgreen-cell');
                 tr.appendChild(td);
             }
-        }
+        }rowCounter++;
         Board.appendChild(tr);
     }
     center.appendChild(Board);
