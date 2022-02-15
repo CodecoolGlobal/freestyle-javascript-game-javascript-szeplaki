@@ -1,5 +1,4 @@
 function initGame() {
-<<<<<<< HEAD
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
@@ -10,10 +9,8 @@ function initGame() {
     createBoard()
     initSnake(snake)
     setInterval(startGame, 2000)
-
-=======
     createMenu();
->>>>>>> 9327ad58a68d231129e0255bdff79dc3d960e62c
+
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 
@@ -22,7 +19,6 @@ function initSnake(snake) {
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
         document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-tail');
 }
-
 
 function startGame() {
     let snakeSpeed = 1;
