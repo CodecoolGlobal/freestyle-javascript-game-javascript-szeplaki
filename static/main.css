@@ -14,3 +14,10 @@
 .mediumseagreen-cell {
     background-color: mediumseagreen;
 }
+
+.snake-head,
+.snake,
+.snake-tail {
+    background-color: darkblue;
+}
+
