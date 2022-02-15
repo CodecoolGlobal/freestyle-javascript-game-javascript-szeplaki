@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Javascript Game</title>
+    <title>Snake</title>
     <meta charset="UTF-8">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
-    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="../static/main.css">
+
 </head>
 <body>
-    <div class="main-menu">
-        <div class="menu">
-            START GAME
-        </div>
-        <div class="menu">
-            RANKINGS
-        </div>
-        <div class="menu">
-            CREDITS
-        </div>
-    </div>
-    <div class="logout">
-        <form action="{{ url_for('logout') }}">
-            <button type="submit" id="btn">LOGOUT</button>
-        </form>
-    </div>
+ <h1>{{ message }}</h1>
+    <form action="{{ url_for('logout') }}">
+        <button type="submit">LOGOUT</button>
+    </form>
+    <script src="../static/js/game.js" defer></script>
 </body>
 </html>

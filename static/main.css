@@ -1,0 +1,16 @@
+.body {
+    text-align: center;
+}
+
+.cell {
+    height: 50px;
+    width: 50px;
+}
+
+.lightgreen-cell {
+    background-color: lightgreen;
+}
+
+.mediumseagreen-cell {
+    background-color: mediumseagreen;
+}
