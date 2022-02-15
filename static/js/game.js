@@ -6,10 +6,15 @@ function initGame() {
 function createBoard(){
     let center = document.createElement('center');
     let Board = document.createElement('table');
+    let counter = 0;
     for (let i = 0; i < 15; i++) {
         let tr = document.createElement('tr');
+
         for (let j = 0; j < 15; j++) {
+
             let td = document.createElement('td');
+            td.setAttribute('id', counter)
+            counter++;
             if ((i + j) % 2 === 0) {
                 td.setAttribute('class', 'cell mediumseagreen-cell');
                 tr.appendChild(td);
