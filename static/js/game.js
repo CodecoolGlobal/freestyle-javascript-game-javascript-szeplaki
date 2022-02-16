@@ -6,9 +6,9 @@ function initGame() {
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
-    let snake = [getSnakeCoordinates(7, 0),
+    let snake = [getSnakeCoordinates(7, 2),
                 getSnakeCoordinates(7, 1),
-                getSnakeCoordinates(7, 2)]
+                getSnakeCoordinates(7, 0)]
 
 
     initSnake(snake)
@@ -35,16 +35,18 @@ function getSnakeCoordinates(row, col) {
     return {row:row, col:col}
 }
 
-function moveSnake() {
+function moveSnake(snake) {
+    debugger;
     let head = document.getElementsByClassName('snake-head');
+    let middle = document.getElementsByClassName('snake')
     let tail = document.getElementsByClassName('snake-tail');
-    head.className.remove('snake-head');
-    head.className.add('snake');
-    tail.className.remove('snake-tail');
-    let nextHead = head.id++
-    let nextTail = tail.id++
-    document.getElementById(`${nextHead}`).classList.add('snake-head');
-    document.getElementById(`${nextTail}`).classList.add('snake-tail');
+    head[0].classList.add("snake");
+    head[0].classList.remove('snake-head');
+    tail[0].classList.remove('snake-tail');
+    // let nextHead = snake[0].row, snake[0].col
+    // let nextTail = tail.id++
+    // document.getElementById(`${nextHead}`).classList.add('snake-head');
+    // document.getElementById(`${nextTail}`).classList.add('snake-tail');
 }
 
 
@@ -77,6 +79,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
+    drop_apple_on_board(Board)
 }
 
 function createMenu(){
@@ -169,3 +172,12 @@ function displayCredit(){
     document.body.appendChild(pTag2);
 }
 initGame();
+
+
+function drop_apple_on_board(Board){
+    const rnd_col = Math.floor(Math.random() * 14) + 0;
+    const rnd_row = Math.floor(Math.random() * 14) + 0;
+    console.log(rnd_col, rnd_row)
+    Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
+    return Board
+}
