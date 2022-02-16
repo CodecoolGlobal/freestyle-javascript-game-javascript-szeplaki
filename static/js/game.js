@@ -1,53 +1,72 @@
+let snake = [getSnakeCoordinates(7, 0),
+                getSnakeCoordinates(7, 1),
+                getSnakeCoordinates(7, 2)]
+
+let snakeDirection = 'right';
 let score = 0;
 let counter = 0;
 
-function initGame() {
-    createMenu();
-
-    let snakeSpeed = 1;
-    let intervalTime = 0;
-    let interval = 0;
-    let snake = [getSnakeCoordinates(7, 2),
-                getSnakeCoordinates(7, 1),
-                getSnakeCoordinates(7, 0)]
-
-
-    initSnake(snake)
-    setInterval(startGame, 2000)
-
-
-    // Your game can start here, but define separate functions, don't write everything in here :)
-}
 
 function initSnake(snake) {
-        document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-head');
+        document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
-        document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-tail');
+        document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-head');
 }
 
 function startGame() {
-    let snakeSpeed = 1;
-    let intervalTime = 2000;
-    let interval = 0;
-    interval = setInterval(moveSnake, intervalTime);
+    document.addEventListener('keydown', function(e) {
+            switch (e.keyCode) {
+                case 37:
+                    snakeDirection = 'left'
+                    break;
+                case 38:
+                    snakeDirection = 'up'
+                    break;
+                case 39:
+                    snakeDirection = 'right'
+                    break;
+                case 40:
+                    snakeDirection = 'down'
+                    break;
+            }})
+    let intervalTime = 500;
+    setInterval(() => moveSnake(snakeDirection), intervalTime);
 }
 
 function getSnakeCoordinates(row, col) {
     return {row:row, col:col}
 }
 
-function moveSnake(snake) {
-    debugger;
-    let head = document.getElementsByClassName('snake-head');
-    let middle = document.getElementsByClassName('snake')
-    let tail = document.getElementsByClassName('snake-tail');
-    head[0].classList.add("snake");
-    head[0].classList.remove('snake-head');
-    tail[0].classList.remove('snake-tail');
-    // let nextHead = snake[0].row, snake[0].col
-    // let nextTail = tail.id++
-    // document.getElementById(`${nextHead}`).classList.add('snake-head');
-    // document.getElementById(`${nextTail}`).classList.add('snake-tail');
+function moveSnake(snakeDirection) {
+    let head = document.getElementsByClassName('snake-head')[0];
+    let middle = document.getElementsByClassName('snake')[0];
+    let tail = document.getElementsByClassName('snake-tail')[0];
+    let head_row = Number(head.dataset.row)
+    let head_col = Number(head.dataset.col)
+    switch (snakeDirection) {
+        case 'left':
+            head_col -= 1;
+            break;
+        case 'up':
+            head_row -= 1;
+            break;
+        case 'right':
+            head_col += 1;
+            console.log(head_col)
+            break;
+        case 'down':
+            head_row += 1;
+            break;
+    }
+
+
+    let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
+    elementOfNewHeadCoords.classList.add('snake-head')
+    head.classList.add('snake');
+    head.classList.remove('snake-head');
+    middle.classList.add('snake-tail');
+    middle.classList.remove('snake')
+    tail.classList.remove('snake-tail');
 }
 
 function createBoard(){
@@ -97,7 +116,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    drop_apple_on_board(Board)
+    // drop_apple_on_board(Board)
 }
 
 function createMenu(){
@@ -199,4 +218,10 @@ function drop_apple_on_board(Board){
     Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
     return Board
 }
-
+function initGame() {
+    createMenu();
+    createBoard();
+    initSnake(snake);
+    startGame();
+    // Your game can start here, but define separate functions, don't write everything in here :)
+}
