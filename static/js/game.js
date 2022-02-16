@@ -58,7 +58,6 @@ function moveSnake(snakeDirection) {
             break;
         case 'right':
             head_col += 1;
-            console.log(head_col)
             break;
         case 'down':
             head_row += 1;
@@ -67,6 +66,7 @@ function moveSnake(snakeDirection) {
 
 
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
+    checkWall(head_row, head_col);
     elementOfNewHeadCoords.classList.add('snake-head')
     head.classList.add('snake');
     head.classList.remove('snake-head');
@@ -75,9 +75,12 @@ function moveSnake(snakeDirection) {
     tail.classList.remove('snake-tail');
 }
 
-function checkMove(elementOfNewHeadCoords, Board){
-    let col = elementOfNewHeadCoords[0]
-    let row = elementOfNewHeadCoords[1]
+function checkWall(row, col){
+    if (row === globalRow || col === globalCol || row === -1 || col === -1) {
+        alert('Game over!');
+        // ide kell egy game over
+        // felajánlja a kövi játékot
+    }
 
 }
 
