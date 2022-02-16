@@ -33,3 +33,11 @@ def verifying_log_in_password(username, password):
     for data in user:
         hashed_password = data['password']
     return util.verify_password(password, hashed_password)
+
+
+@connection_handler.connection_handler
+def get_highscores(cursor):
+    query = """SELECT username, score
+               FROM user_data"""
+    cursor.execute(SQL(query))
+    return cursor.fetchall()

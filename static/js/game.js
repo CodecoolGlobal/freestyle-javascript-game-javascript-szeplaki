@@ -1,4 +1,8 @@
+let score = 0;
+
 function initGame() {
+    createMenu();
+
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
@@ -6,10 +10,10 @@ function initGame() {
                 getSnakeCoordinates(7, 1),
                 getSnakeCoordinates(7, 2)]
 
-    createBoard()
+
     initSnake(snake)
     setInterval(startGame, 2000)
-    createMenu();
+
 
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
@@ -87,11 +91,14 @@ function createMenu(){
     menuOption1.appendChild(startGame);
     let menuOption2 = document.createElement('div');
     menuOption2.className = "option";
+    let hsForm = document.createElement('form');
+    hsForm.action = '/high-score';
     let highScore = document.createElement('button');
-    highScore.id = 'high-score';
-    highScore.textContent = 'Highest Scores';
-    highScore.onclick = (e) => {chosenEvent(e)};
-    menuOption2.appendChild(highScore)
+    highScore.type = 'submit';
+    highScore.value = score.toString();
+    highScore.textContent = 'High Score';
+    hsForm.append(highScore)
+    menuOption2.appendChild(hsForm);
     let menuOption3 = document.createElement('div');
     menuOption3.className = "option";
     let credits = document.createElement('button');
@@ -99,10 +106,21 @@ function createMenu(){
     credits.textContent = 'Credits';
     credits.onclick = (e) => {chosenEvent(e)};
     menuOption3.appendChild(credits)
+    document.body.appendChild(menu);
+    let menuOption4 = document.createElement('div');
+    menuOption4.className = "option";
+    let quitForm = document.createElement('form');
+    quitForm.action = '/logout';
+    quitForm.method = 'POST';
+    let quit = document.createElement('button');
+    quit.type = 'submit';
+    quit.textContent = 'Quit';
+    quitForm.append(quit);
+    menuOption4.appendChild(quitForm);
     menu.append(menuOption1);
     menu.append(menuOption2);
     menu.append(menuOption3);
-    document.body.appendChild(menu);
+    menu.append(menuOption4);
 }
 
 function chosenEvent(e){
@@ -125,6 +143,15 @@ function removeMenu() {
         menu[0].remove();
         }
 
+}
+
+function saveHighScore(){
+    let formToSend = document.createElement('form')
+    formToSend.action = '/high-score';
+    formToSend.method = 'POST';
+    let inputScore = document.createElement('input');
+    inputScore.type = 'hidden';
+    inputScore.value = '' //here comes the highscore
 }
 
 function displayHighScore(){

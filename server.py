@@ -39,10 +39,16 @@ def register_user():
     return render_template('registration.html')
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
+
+
+@app.route('/high-score', methods=['POST', 'GET'])
+def highscore():
+    users = data_handler.get_highscores()
+    return render_template('high-score.html', users=users)
 
 
 if __name__ == "__main__":
