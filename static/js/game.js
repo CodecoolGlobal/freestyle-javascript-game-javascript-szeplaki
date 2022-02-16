@@ -51,6 +51,11 @@ function moveSnake(snake) {
 
 
 function createBoard(){
+    let displayScore = document.createElement('div');
+    displayScore.className = 'Score';
+    let pTag = document.createElement('p');
+    pTag.textContent = 'Score: ' + score.toString();
+    displayScore.appendChild(pTag);
     let center = document.createElement('center');
     let Board = document.createElement('table');
     let rowCounter = 0;
@@ -73,6 +78,7 @@ function createBoard(){
         }rowCounter++;
         Board.appendChild(tr);
     }
+    document.body.appendChild(displayScore);
     center.appendChild(Board);
 
     // Modifying table attribute properties
