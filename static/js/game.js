@@ -1,4 +1,5 @@
 let score = 0;
+let counter = 0;
 
 function initGame() {
     createMenu();
@@ -49,8 +50,18 @@ function moveSnake(snake) {
     // document.getElementById(`${nextTail}`).classList.add('snake-tail');
 }
 
-
 function createBoard(){
+    let timer = document.createElement('div');
+    timer.className = 'timer';
+    let countingTime = document.createElement('p');
+    countingTime.id = 'counter';
+    countingTime.innerHTML = 'Time: ' + counter.toString();
+    setInterval(function (){
+         document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
+        counter++
+        }
+        , 1000);
+    timer.appendChild(countingTime);
     let displayScore = document.createElement('div');
     displayScore.className = 'Score';
     let pTag = document.createElement('p');
@@ -78,6 +89,7 @@ function createBoard(){
         }rowCounter++;
         Board.appendChild(tr);
     }
+    document.body.appendChild(timer);
     document.body.appendChild(displayScore);
     center.appendChild(Board);
 
@@ -160,7 +172,7 @@ function saveHighScore(){
     formToSend.method = 'POST';
     let inputScore = document.createElement('input');
     inputScore.type = 'hidden';
-    inputScore.value = '' //here comes the highscore
+    inputScore.value = score.toString(); //here comes the highscore
 }
 
 function displayHighScore(){
@@ -187,3 +199,4 @@ function drop_apple_on_board(Board){
     Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
     return Board
 }
+
