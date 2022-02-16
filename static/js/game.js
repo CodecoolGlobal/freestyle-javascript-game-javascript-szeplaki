@@ -138,6 +138,7 @@ function createBoard(globalRow, globalCol){
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
     drop_apple_on_board(Board ,globalRow, globalCol);
+    saveHighScore();
 }
 
 function createMenu(){
@@ -228,9 +229,23 @@ function displayHighScore(){
 
 function displayCredit(){
     removeMenu();
-    let pTag2 = document.createElement('p');
-    pTag2.textContent = "credits";
-    document.body.appendChild(pTag2);
+    let header = document.createElement('h1');
+    header.className = 'header';
+    header.textContent = 'Credits'
+    let pTag = document.createElement('p');
+    pTag.textContent = "Some words";
+    document.body.appendChild(header);
+    document.body.appendChild(pTag)
+    let creators = ['Creators of JavaSnake',
+               'Éva Száplaki',
+               'Barbara Szabó-Huszár',
+               'Bálint Vitai',
+               'Gyula Borbély'
+               ];
+    creators.forEach((creator, index) => {
+        setTimeout(() => {
+            pTag.textContent = creator;}, index * 2000)
+    })
 }
 
 
