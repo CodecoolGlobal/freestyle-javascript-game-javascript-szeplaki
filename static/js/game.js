@@ -66,7 +66,9 @@ function moveSnake(snakeDirection) {
 
 
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
+    console.log(elementOfNewHeadCoords);
     checkWall(head_row, head_col);
+    checkApple(head_row, head_col);
     elementOfNewHeadCoords.classList.add('snake-head')
     head.classList.add('snake');
     head.classList.remove('snake-head');
@@ -84,6 +86,13 @@ function checkWall(row, col){
 
 }
 
+function checkApple(row, col) {
+    let elementOfNewHeadCoords = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+    if (elementOfNewHeadCoords.classList.contains('apple')) {
+           elementOfNewHeadCoords.classList.remove('apple');
+           elementOfNewHeadCoords.classList.add('snake-head');
+    }
+}
 
 function createBoard(globalRow, globalCol){
     let timer = document.createElement('div');
