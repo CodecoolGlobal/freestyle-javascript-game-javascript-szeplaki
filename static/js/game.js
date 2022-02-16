@@ -31,6 +31,11 @@ function startGame() {
             }})
     let intervalTime = 500;
     setInterval(() => moveSnake(snakeDirection), intervalTime);
+    setInterval(function (){
+         document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
+        counter++
+        }
+        , 1000);
 }
 
 function getSnakeCoordinates(row, col) {
@@ -75,11 +80,6 @@ function createBoard(){
     let countingTime = document.createElement('p');
     countingTime.id = 'counter';
     countingTime.innerHTML = 'Time: ' + counter.toString();
-    setInterval(function (){
-         document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
-        counter++
-        }
-        , 1000);
     timer.appendChild(countingTime);
     let displayScore = document.createElement('div');
     displayScore.className = 'Score';
@@ -116,7 +116,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    // drop_apple_on_board(Board)
+    drop_apple_on_board(Board);
 }
 
 function createMenu(){
@@ -167,6 +167,9 @@ function chosenEvent(e){
     if (e.target.id === 'Start'){
         removeMenu();
         createBoard();
+        initSnake(snake);
+        startGame();
+
     }else if (e.target.id === 'high-score'){
         removeMenu();
         displayHighScore();
@@ -215,14 +218,12 @@ function drop_apple_on_board(Board){
     const rnd_col = Math.floor(Math.random() * 14) + 0;
     const rnd_row = Math.floor(Math.random() * 14) + 0;
     console.log(rnd_col, rnd_row)
-    Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
-    return Board
+    Board.children[rnd_col].children[rnd_row].classList.add('apple');
+    return Board;
 }
 function initGame() {
     createMenu();
-    createBoard();
-    initSnake(snake);
-    startGame();
+
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 initGame();
