@@ -5,7 +5,8 @@ let snake = [getSnakeCoordinates(7, 0),
 let snakeDirection = 'right';
 let score = 0;
 let counter = 0;
-
+let globalRow = 15;
+let globalCol = 15;
 
 function initSnake(snake) {
         document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
@@ -74,7 +75,14 @@ function moveSnake(snakeDirection) {
     tail.classList.remove('snake-tail');
 }
 
-function createBoard(){
+function checkMove(elementOfNewHeadCoords, Board){
+    let col = elementOfNewHeadCoords[0]
+    let row = elementOfNewHeadCoords[1]
+
+}
+
+
+function createBoard(globalRow, globalCol){
     let timer = document.createElement('div');
     timer.className = 'timer';
     let countingTime = document.createElement('p');
@@ -89,11 +97,12 @@ function createBoard(){
     let center = document.createElement('center');
     let Board = document.createElement('table');
     let rowCounter = 0;
-    for (let i = 0; i < 15; i++) {
+
+    for (let i = 0; i < globalRow; i++) {
         let tr = document.createElement('tr');
         tr.dataset.row = rowCounter.toString();
         let colCounter = 0;
-        for (let j = 0; j < 15; j++) {
+        for (let j = 0; j < globalCol; j++) {
             let td = document.createElement('td');
             td.dataset.row = rowCounter.toString();
             td.dataset.col = colCounter.toString();
@@ -116,7 +125,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    drop_apple_on_board(Board);
+    drop_apple_on_board(Board ,globalRow, globalCol);
 }
 
 function createMenu(){
@@ -166,7 +175,7 @@ function createMenu(){
 function chosenEvent(e){
     if (e.target.id === 'Start'){
         removeMenu();
-        createBoard();
+        createBoard(globalRow, globalCol);
         initSnake(snake);
         startGame();
 
@@ -214,9 +223,9 @@ function displayCredit(){
 
 
 
-function drop_apple_on_board(Board){
-    const rnd_col = Math.floor(Math.random() * 14) + 0;
-    const rnd_row = Math.floor(Math.random() * 14) + 0;
+function drop_apple_on_board(Board, globalRow, globalCol){
+    const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;
+    const rnd_row = Math.floor(Math.random() * (globalRow-1)) + 0;
     console.log(rnd_col, rnd_row)
     Board.children[rnd_col].children[rnd_row].classList.add('apple');
     return Board;
