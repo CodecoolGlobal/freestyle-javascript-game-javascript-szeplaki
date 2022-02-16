@@ -208,7 +208,7 @@ function displayCredit(){
     pTag2.textContent = "credits";
     document.body.appendChild(pTag2);
 }
-initGame();
+
 
 
 function drop_apple_on_board(Board){
@@ -225,3 +225,4 @@ function initGame() {
     startGame();
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
+initGame();
