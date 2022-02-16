@@ -24,3 +24,38 @@
 .apple {
     background-color: #9C1A1C;
 }
+
+body {
+    background-color: black;
+
+}
+
+.menu {
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    height: 25rem;
+    width: 20rem;
+    left: 30rem;
+    border: 3px solid deeppink;
+
+}
+
+.option {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.option button {
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+}
+
+.option button:hover {
+    background-color: deeppink;
+    color: black;
+}
