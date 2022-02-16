@@ -1,49 +1,84 @@
+let snake = [getSnakeCoordinates(7, 0),
+                getSnakeCoordinates(7, 1),
+                getSnakeCoordinates(7, 2)]
+
+let snakeDirection = 'right';
+
 function initGame() {
     let snakeSpeed = 1;
     let intervalTime = 0;
     let interval = 0;
-    let snake = [getSnakeCoordinates(7, 0),
-                getSnakeCoordinates(7, 1),
-                getSnakeCoordinates(7, 2)]
 
-    createBoard()
-    initSnake(snake)
-    setInterval(startGame, 2000)
+    createBoard();
+    initSnake(snake);
+    startGame();
     createMenu();
-<<<<<<< HEAD
-=======
-
->>>>>>> 253ffb923f4204bd53a85620c61ff07439cddc0a
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 
 function initSnake(snake) {
-        document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-head');
+        document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
-        document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-tail');
+        document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-head');
 }
 
 function startGame() {
+    document.addEventListener('keydown', function(e) {
+            switch (e.keyCode) {
+                case 37:
+                    snakeDirection = 'left'
+                    break;
+                case 38:
+                    snakeDirection = 'up'
+                    break;
+                case 39:
+                    snakeDirection = 'right'
+                    break;
+                case 40:
+                    snakeDirection = 'down'
+                    break;
+            }})
     let snakeSpeed = 1;
-    let intervalTime = 2000;
+    let intervalTime = 500;
     let interval = 0;
-    interval = setInterval(moveSnake, intervalTime);
+    interval = setInterval(() => moveSnake(snakeDirection), intervalTime);
 }
 
 function getSnakeCoordinates(row, col) {
     return {row:row, col:col}
 }
 
-function moveSnake() {
-    let head = document.getElementsByClassName('snake-head');
-    let tail = document.getElementsByClassName('snake-tail');
-    head.className.remove('snake-head');
-    head.className.add('snake');
-    tail.className.remove('snake-tail');
-    let nextHead = head.id++
-    let nextTail = tail.id++
-    document.getElementById(`${nextHead}`).classList.add('snake-head');
-    document.getElementById(`${nextTail}`).classList.add('snake-tail');
+function moveSnake(snakeDirection) {
+    let head = document.getElementsByClassName('snake-head')[0];
+    let middle = document.getElementsByClassName('snake')[0];
+    let tail = document.getElementsByClassName('snake-tail')[0];
+    let head_row = Number(head.dataset.row)
+    let head_col = Number(head.dataset.col)
+    switch (snakeDirection) {
+        case 'left':
+            head_col -= 1;
+            break;
+        case 'up':
+            head_row -= 1;
+            break;
+        case 'right':
+            head_col += 1;
+            console.log(head_col)
+            break;
+        case 'down':
+            head_row += 1;
+            break;
+    }
+
+
+    let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]` );
+    elementOfNewHeadCoords.classList.add('snake-head')
+    head.classList.add('snake');
+    head.classList.remove('snake-head');
+    middle.classList.add('snake-tail');
+    middle.classList.remove('snake')
+    tail.classList.remove('snake-tail');
+
 }
 
 
@@ -76,7 +111,7 @@ function createBoard(){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    drop_apple_on_board(Board)
+    // drop_apple_on_board(Board)
 }
 
 function createMenu(){
@@ -152,6 +187,6 @@ function drop_apple_on_board(Board){
     const rnd_col = Math.floor(Math.random() * 14) + 0;
     const rnd_row = Math.floor(Math.random() * 14) + 0;
     console.log(rnd_col, rnd_row)
-    Board.children[rnd_col].children[rnd_row].innerHTML = "APPLE";
+    Board.children[rnd_col].children[rnd_row].innerHTML = "";
     return Board
 }
