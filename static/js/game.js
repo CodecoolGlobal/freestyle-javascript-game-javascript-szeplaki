@@ -1,14 +1,14 @@
 let snake = [getSnakeCoordinates(7, 0),
                 getSnakeCoordinates(7, 1),
                 getSnakeCoordinates(7, 2)]
-
+let intervalTime = 500;
 let snakeDirection = 'right';
 let score = 0;
 let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
-let gameInterval = {}
+let gameInterval = {};
 
 let gameOverSound = document.querySelector('#gameOver');
 let appleSound = document.querySelector('#appleSound');
