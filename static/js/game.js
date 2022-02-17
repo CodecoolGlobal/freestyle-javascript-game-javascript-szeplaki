@@ -160,6 +160,8 @@ function createBoard(globalRow, globalCol){
     document.body.appendChild(center);
     let appleCoords = drop_apple_on_board(globalRow, globalCol);
     Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
+    saveHighScore();
+
 }
 
 function createMenu(){
@@ -220,6 +222,9 @@ function chosenEvent(e){
     }else if (e.target.id === 'credits'){
         removeMenu();
         displayCredit();
+    }else if (e.target.id === 'backToMain'){
+        removeCredits();
+        createMenu();
     }
 }
 
@@ -250,12 +255,51 @@ function displayHighScore(){
 
 function displayCredit(){
     removeMenu();
-    let pTag2 = document.createElement('p');
-    pTag2.textContent = "credits";
-    document.body.appendChild(pTag2);
+    let credits = document.createElement('div');
+    credits.className = 'credits'
+    let header = document.createElement('h1');
+    header.id = 'header';
+    header.textContent = 'Credits'
+    let container = document.createElement('div');
+    container.className = 'container';
+    let pTag = document.createElement('p');
+    pTag.id = 'roller';
+    pTag.textContent = "Some words";
+    container.append(pTag);
+    let btnContainer = document.createElement('div');
+    btnContainer.className = 'hidden-button';
+    let button = document.createElement('button');
+    button.id = 'backToMain';
+    button.textContent = 'Back';
+    button.onclick = (e) => {chosenEvent(e)};
+    btnContainer.append(button);
+    credits.append(header);
+    credits.append(container);
+    credits.append(btnContainer)
+    document.body.appendChild(credits);
+    let creators = ['Creators of JavaSnake',
+               'Éva Száplaki',
+               'Barbara Szabó-Huszár',
+               'Bálint Vitai',
+               'Gyula Borbély',
+               'Special Thanks',
+               'to All Mentors for helping us build the game',
+               'Codecool for allowing us to have FUN in JS',
+               'and to You guys for playing the game!'
+               ];
+    creators.forEach((creator, index) => {
+        setTimeout(() => {
+            pTag.textContent = creator;}, index * 4000)
+    })
+
 }
 
-
+function removeCredits(){
+    let credits = document.getElementsByClassName('credits')
+    while (credits.length > 0){
+        credits[0].remove();
+    }
+}
 
 function drop_apple_on_board(globalRow, globalCol){
     const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;

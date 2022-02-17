@@ -24,3 +24,89 @@
 .apple {
     background-color: #9C1A1C;
 }
+
+body {
+    background-color: black;
+
+}
+
+.menu {
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    height: 25rem;
+    width: 20rem;
+    left: 30rem;
+    border: 3px solid deeppink;
+
+}
+
+.option {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.option button {
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+}
+
+.option button:hover {
+    background-color: deeppink;
+    color: black;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    color: deeppink;
+
+}
+
+#roller {
+    display: flex;
+    justify-content: center;
+    color: deeppink;
+    transition: color;
+    padding-top: 5rem;
+    font-size: 30px;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+    
+}
+
+.container {
+    animation: fade-out 4s;
+    animation-iteration-count: 9;
+}
+
+.hidden-button {
+    display: flex;
+    justify-content: center;
+}
+
+#backToMain {
+
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+    margin-top: 5rem;
+}
+
+#backToMain:hover {
+    background-color: deeppink;
+    color: black;
+}
