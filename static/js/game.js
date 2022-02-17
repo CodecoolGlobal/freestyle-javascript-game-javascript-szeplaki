@@ -26,16 +26,28 @@ function startGame() {
     document.addEventListener('keydown', function(e) {
             switch (e.keyCode) {
                 case 37:
-                    snakeDirection = 'left'
+                    if (snakeDirection === "right") {
+                    snakeDirection = "right";
+                    } else {
+                    snakeDirection = 'left'};
                     break;
                 case 38:
-                    snakeDirection = 'up'
+                    if (snakeDirection === "down") {
+                    snakeDirection = "down";
+                    } else {
+                    snakeDirection = 'up'};
                     break;
                 case 39:
-                    snakeDirection = 'right'
+                    if (snakeDirection === "left") {
+                    snakeDirection = "left";
+                    } else {
+                    snakeDirection = 'right'};
                     break;
                 case 40:
-                    snakeDirection = 'down'
+                    if (snakeDirection === "up") {
+                    snakeDirection = "up";
+                    } else {
+                    snakeDirection = 'down'};
                     break;
             }})
     let intervalTime = 500;
@@ -53,6 +65,7 @@ function getSnakeCoordinates(row, col) {
 
 
 function moveSnake(snakeDirection) {
+    console.log(snakeDirection)
     let head = document.getElementsByClassName('snake-head')[0];
     let tail = document.getElementsByClassName('snake-tail')[0];
     let head_row = Number(head.dataset.row)
