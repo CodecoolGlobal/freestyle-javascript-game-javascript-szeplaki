@@ -116,3 +116,10 @@ h1 {
     text-align: center;
     color: white;
 }
+
+.timer {
+    color: deeppink;
+}
+.Score {
+    color: deeppink;
+}

@@ -74,9 +74,9 @@ function moveSnake(snakeDirection) {
     }
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
-    if (elementOfNewHeadCoords.classList.contains('apple')) {  //this is eating an apple
+    if (elementOfNewHeadCoords.classList.contains('apple')) {
         appleSound.src = 'static/sfx/appleSound.wav';
-        appleSound.play();  //sound when eating apple
+        appleSound.play();
         elementOfNewHeadCoords.classList.remove('apple'); //apple eaten
         elementOfNewHeadCoords.classList.add('snake-head');  // snake grows
         head.classList.add('snake');
@@ -135,7 +135,6 @@ function createBoard(globalRow, globalCol){
     let center = document.createElement('center');
     let Board = document.createElement('table');
     let rowCounter = 0;
-
     for (let i = 0; i < globalRow; i++) {
         let tr = document.createElement('tr');
         tr.dataset.row = rowCounter.toString();
@@ -166,7 +165,6 @@ function createBoard(globalRow, globalCol){
     let appleCoords = drop_apple_on_board(globalRow, globalCol);
     Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
     saveHighScore();
-
 }
 
 function createMenu(){
