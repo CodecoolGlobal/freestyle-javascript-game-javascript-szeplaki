@@ -92,7 +92,6 @@ function moveSnake(snakeDirection) {
         head.classList.remove('snake-head');
         let appleCoords = drop_apple_on_board(globalRow, globalCol);
         document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
-        // Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
 
     } else {
         let middles = document.querySelectorAll("[data-id]");
@@ -127,6 +126,10 @@ function checkWall(row, col){
         // ide kell egy game over
         // felajánlja a kövi játékot
     }
+}
+
+function gameOver() {
+    ;
 }
 
 function createBoard(globalRow, globalCol){
