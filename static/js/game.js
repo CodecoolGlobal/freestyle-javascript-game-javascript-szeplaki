@@ -54,7 +54,6 @@ function getSnakeCoordinates(row, col) {
 
 function moveSnake(snakeDirection) {
     let head = document.getElementsByClassName('snake-head')[0];
-    let middle = document.getElementsByClassName('snake');
     let tail = document.getElementsByClassName('snake-tail')[0];
     let head_row = Number(head.dataset.row)
     let head_col = Number(head.dataset.col)
@@ -73,13 +72,9 @@ function moveSnake(snakeDirection) {
             break;
     }
 
-
-
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
-    if(elementOfNewHeadCoords.classList.contains('snake') || elementOfNewHeadCoords.classList.contains('snake-tail')) {
-        alert('Game Over!');
-    }
+    checkSnake(elementOfNewHeadCoords);
 
     if (elementOfNewHeadCoords.classList.contains('apple')) {
         appleSound.src = 'static/sfx/appleSound.wav';
@@ -90,7 +85,7 @@ function moveSnake(snakeDirection) {
         head.dataset.id = counterDataId.toString();
         counterDataId++;
         head.classList.remove('snake-head');
-        let appleCoords = drop_apple_on_board(globalRow, globalCol);
+        let appleCoords = dropAppleOnBoard(globalRow, globalCol);
         document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
 
     } else {
@@ -118,19 +113,27 @@ function moveSnake(snakeDirection) {
 
 function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
-        let h1 = document.querySelector('h1');
-        h1.textContent = 'Game over!';
-        gameOverSound.src = 'static/sfx/game_over.wav';
-        gameOverSound.play();
-        clearInterval(gameInterval)
-        // ide kell egy game over
-        // felajánlja a kövi játékot
+        gameOver();
     }
 }
 
-function gameOver() {
-    ;
+
+function checkSnake(elementOfNewHeadCoords) {
+    if (elementOfNewHeadCoords.classList.contains('snake') || elementOfNewHeadCoords.classList.contains('snake-tail')) {
+        gameOver();
+    }
 }
+
+
+function gameOver() {
+    let h1 = document.querySelector('h1');
+    h1.textContent = 'Game over!';
+    gameOverSound.src = 'static/sfx/game_over.wav';
+    gameOverSound.play();
+    clearInterval(gameInterval)
+    createMenu()
+}
+
 
 function createBoard(globalRow, globalCol){
     let timer = document.createElement('div');
@@ -175,10 +178,9 @@ function createBoard(globalRow, globalCol){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    let appleCoords = drop_apple_on_board(globalRow, globalCol);
+    let appleCoords = dropAppleOnBoard(globalRow, globalCol);
     Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
     saveHighScore();
-
 }
 
 function createMenu(){
@@ -318,7 +320,7 @@ function removeCredits(){
     }
 }
 
-function drop_apple_on_board(globalRow, globalCol){
+function dropAppleOnBoard(globalRow, globalCol){
     const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;
     const rnd_row = Math.floor(Math.random() * (globalRow-1)) + 0;
     let appleCoords = {
