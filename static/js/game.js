@@ -14,7 +14,6 @@ function initSnake(snake) {
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).dataset.id = "0";
         document.querySelector(`[data-row="${snake[2].row}"][data-col="${snake[2].col}"]` ).classList.add('snake-head');
-
 }
 
 function startGame() {
@@ -49,7 +48,6 @@ function getSnakeCoordinates(row, col) {
 
 function moveSnake(snakeDirection) {
     let head = document.getElementsByClassName('snake-head')[0];
-    let middle = document.getElementsByClassName('snake');
     let tail = document.getElementsByClassName('snake-tail')[0];
     let head_row = Number(head.dataset.row)
     let head_col = Number(head.dataset.col)
@@ -67,10 +65,13 @@ function moveSnake(snakeDirection) {
             head_row += 1;
             break;
     }
-
-
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
+    if (elementOfNewHeadCoords.classList.contains('snake') || elementOfNewHeadCoords.classList.contains('snake-tail')) {
+        ;
+        // ide kell egy game over
+        // felajánlja a kövi játékot
+    }
     if (elementOfNewHeadCoords.classList.contains('apple')) {
         elementOfNewHeadCoords.classList.remove('apple');
         elementOfNewHeadCoords.classList.add('snake-head');
@@ -78,16 +79,21 @@ function moveSnake(snakeDirection) {
         head.dataset.id = counterDataId.toString();
         counterDataId++;
         head.classList.remove('snake-head');
-        let appleCoords = drop_apple_on_board(globalRow, globalCol);
-        document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
-        // Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
-
+        let appleCoords = dropAppleOnBoard(globalRow, globalCol);
+        let coordsToCheck = document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`);
+        if (coordsToCheck.classList.contains('snake') || coordsToCheck.classList.contains('snake-tail')) {
+            while (coordsToCheck.classList.contains('snake') === true || coordsToCheck.classList.contains('snake-tail') === true) {
+                dropAppleOnBoard(globalRow, globalCol);
+            }
+        } else {
+            document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
+        }
     } else {
         let middles = document.querySelectorAll("[data-id]");
         let array = []
         for (let elem of middles) {
-            let dataid = elem.getAttribute('data-id');
-            array.push(Number(dataid));
+            let dataId = elem.getAttribute('data-id');
+            array.push(Number(dataId));
         }
         let minimumNumber = Math.min(...array);
         let newTail = document.querySelector(`[data-id = '${minimumNumber}']`);
@@ -101,14 +107,11 @@ function moveSnake(snakeDirection) {
         newTail.classList.remove('snake');
         tail.classList.remove('snake-tail');
     }
-    // checkApple(head_row, head_col);
-
 }
 
 function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
-        let h1 = document.querySelector('h1');
-        h1.textContent = 'Game over!';
+        ;
         // ide kell egy game over
         // felajánlja a kövi játékot
     }
@@ -157,10 +160,9 @@ function createBoard(globalRow, globalCol){
     Board.setAttribute('cellspacing', '0');
     Board.setAttribute('width', '800px');
     document.body.appendChild(center);
-    let appleCoords = drop_apple_on_board(globalRow, globalCol);
+    let appleCoords = dropAppleOnBoard(globalRow, globalCol);
     Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
     saveHighScore();
-
 }
 
 function createMenu(){
@@ -231,8 +233,7 @@ function removeMenu() {
     let menu = document.getElementsByClassName('menu');
     while (menu.length > 0) {
         menu[0].remove();
-        }
-
+    }
 }
 
 function saveHighScore(){
@@ -249,7 +250,6 @@ function displayHighScore(){
     let pTag = document.createElement('h1');
     pTag.textContent = "highscores"
     document.body.appendChild(pTag);
-
 }
 
 function displayCredit(){
@@ -300,19 +300,17 @@ function removeCredits(){
     }
 }
 
-function drop_apple_on_board(globalRow, globalCol){
+function dropAppleOnBoard(globalRow, globalCol){
     const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;
     const rnd_row = Math.floor(Math.random() * (globalRow-1)) + 0;
     let appleCoords = {
         appleRow: rnd_row,
         appleCol: rnd_col
     }
-
     return appleCoords;
 }
 function initGame() {
     createMenu();
-
     // Your game can start here, but define separate functions, don't write everything in here :)
 }
 initGame();
