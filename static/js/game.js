@@ -10,6 +10,10 @@ let globalRow = 15;
 let globalCol = 15;
 let gameInterval = {}
 
+let gameOverSound = document.querySelector('#gameOver');
+let appleSound = document.querySelector('#appleSound');
+
+
 function initSnake(snake) {
         document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
         document.querySelector(`[data-row="${snake[1].row}"][data-col="${snake[1].col}"]` ).classList.add('snake');
@@ -73,6 +77,8 @@ function moveSnake(snakeDirection) {
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
     if (elementOfNewHeadCoords.classList.contains('apple')) {
+        appleSound.src = 'static/sfx/appleSound.wav';
+        appleSound.play();
         elementOfNewHeadCoords.classList.remove('apple');
         elementOfNewHeadCoords.classList.add('snake-head');
         head.classList.add('snake');
@@ -110,6 +116,8 @@ function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
         let h1 = document.querySelector('h1');
         h1.textContent = 'Game over!';
+        gameOverSound.src = 'static/sfx/game_over.wav';
+        gameOverSound.play();
         clearInterval(gameInterval)
         // ide kell egy game over
         // felajánlja a kövi játékot
