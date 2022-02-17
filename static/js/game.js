@@ -138,7 +138,7 @@ function gameOver() {
     gameOverSound.play();
     clearInterval(gameInterval);
     clearInterval(clock);
-    createMenu();
+    saveHighScore();
 }
 
 
@@ -187,7 +187,7 @@ function createBoard(globalRow, globalCol){
     document.body.appendChild(center);
     let appleCoords = dropAppleOnBoard(globalRow, globalCol);
     Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
-    saveHighScore();
+
 }
 
 function createMenu(){
@@ -262,12 +262,18 @@ function removeMenu() {
 }
 
 function saveHighScore(){
-    let formToSend = document.createElement('form')
+    let formToSend = document.createElement('form');
     formToSend.action = '/high-score';
     formToSend.method = 'POST';
     let inputScore = document.createElement('input');
-    inputScore.type = 'hidden';
-    inputScore.value = score.toString(); //here comes the highscore
+    let button = document.createElement('button');
+    button.type = 'submit';
+    inputScore.name = 'score_to_send';
+    inputScore.id = 'score_to_send';
+    formToSend.append(inputScore);
+    formToSend.append(button);
+    document.body.appendChild(formToSend)
+    inputScore.value = score.toString();
 }
 
 function displayHighScore(){

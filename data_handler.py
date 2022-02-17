@@ -41,3 +41,11 @@ def get_highscores(cursor):
                FROM user_data"""
     cursor.execute(SQL(query))
     return cursor.fetchall()
+
+
+@connection_handler.connection_handler
+def update_score(cursor, username, score):
+    query = """UPDATE user_data
+               SET score = {score}
+               WHERE username = {username}"""
+    cursor.execute(SQL(query).format(username=Literal(username), score=Literal(score)))

@@ -47,6 +47,11 @@ def logout():
 
 @app.route('/high-score', methods=['POST', 'GET'])
 def highscore():
+    if request.method == 'POST':
+        username = session.get('username')
+        score = request.form['score_to_send']
+        data_handler.update_score(username, score)
+        return redirect('/')
     users = data_handler.get_highscores()
     return render_template('high-score.html', users=users)
 
