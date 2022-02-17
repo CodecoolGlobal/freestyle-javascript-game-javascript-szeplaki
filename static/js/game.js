@@ -74,8 +74,13 @@ function moveSnake(snakeDirection) {
     }
 
 
+
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
+    if(elementOfNewHeadCoords.classList.contains('snake') || elementOfNewHeadCoords.classList.contains('snake-tail')) {
+        alert('Game Over!');
+    }
+
     if (elementOfNewHeadCoords.classList.contains('apple')) {
         appleSound.src = 'static/sfx/appleSound.wav';
         appleSound.play();
