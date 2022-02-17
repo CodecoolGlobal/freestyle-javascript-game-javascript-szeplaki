@@ -8,7 +8,7 @@ let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
-let intervalTime = 500;
+let gameInterval = {}
 
 let gameOverSound = document.querySelector('#gameOver');
 let appleSound = document.querySelector('#appleSound');
@@ -38,7 +38,8 @@ function startGame() {
                     snakeDirection = 'down'
                     break;
             }})
-    setInterval(() => moveSnake(snakeDirection), intervalTime);
+    let intervalTime = 500;
+    gameInterval = setInterval(() => moveSnake(snakeDirection), intervalTime);
     setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
         counter++;
@@ -113,8 +114,7 @@ function checkWall(row, col){
         h1.textContent = 'Game over!';
         gameOverSound.src = 'static/sfx/game_over.wav';
         gameOverSound.play();
-
-
+        clearInterval(gameInterval)
         // ide kell egy game over
         // felajánlja a kövi játékot
     }

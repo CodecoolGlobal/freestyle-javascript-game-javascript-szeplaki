@@ -15,7 +15,9 @@
     background-color: mediumseagreen;
 }
 
-.snake-head,
+.snake-head {
+    background-color: darkblue;
+}
 .snake,
 .snake-tail {
     background-color: darkblue;
