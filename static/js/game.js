@@ -8,6 +8,7 @@ let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
+let intervalTime = 500;
 
 let gameOverSound = document.querySelector('#gameOver');
 let appleSound = document.querySelector('#appleSound');
@@ -37,7 +38,6 @@ function startGame() {
                     snakeDirection = 'down'
                     break;
             }})
-    let intervalTime = 500;
     setInterval(() => moveSnake(snakeDirection), intervalTime);
     setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
@@ -71,24 +71,20 @@ function moveSnake(snakeDirection) {
             head_row += 1;
             break;
     }
-
-
     let elementOfNewHeadCoords = document.querySelector(`[data-row="${head_row}"][data-col="${head_col}"]`);
     checkWall(head_row, head_col);
-    if (elementOfNewHeadCoords.classList.contains('apple')) {
+    if (elementOfNewHeadCoords.classList.contains('apple')) {  //this is eating an apple
         appleSound.src = 'static/sfx/appleSound.wav';
-        appleSound.play();
-        elementOfNewHeadCoords.classList.remove('apple');
-        elementOfNewHeadCoords.classList.add('snake-head');
+        appleSound.play();  //sound when eating apple
+        elementOfNewHeadCoords.classList.remove('apple'); //apple eaten
+        elementOfNewHeadCoords.classList.add('snake-head');  // snake grows
         head.classList.add('snake');
         head.dataset.id = counterDataId.toString();
         counterDataId++;
         head.classList.remove('snake-head');
         let appleCoords = drop_apple_on_board(globalRow, globalCol);
         document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
-        // Board.children[appleCoords.appleRow].children[appleCoords.appleCol].classList.add('apple');
-
-    } else {
+        } else {
         let middles = document.querySelectorAll("[data-id]");
         let array = []
         for (let elem of middles) {
@@ -117,6 +113,7 @@ function checkWall(row, col){
         h1.textContent = 'Game over!';
         gameOverSound.src = 'static/sfx/game_over.wav';
         gameOverSound.play();
+
 
         // ide kell egy game over
         // felajánlja a kövi játékot
