@@ -8,6 +8,11 @@ let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
+let gameInterval = {}
+
+let gameOverSound = document.querySelector('#gameOver');
+let appleSound = document.querySelector('#appleSound');
+
 
 function initSnake(snake) {
         document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
@@ -33,7 +38,7 @@ function startGame() {
                     break;
             }})
     let intervalTime = 500;
-    setInterval(() => moveSnake(snakeDirection), intervalTime);
+    gameInterval = setInterval(() => moveSnake(snakeDirection), intervalTime);
     setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
         counter++;
@@ -73,6 +78,8 @@ function moveSnake(snakeDirection) {
         // felajánlja a kövi játékot
     }
     if (elementOfNewHeadCoords.classList.contains('apple')) {
+        appleSound.src = 'static/sfx/appleSound.wav';
+        appleSound.play();
         elementOfNewHeadCoords.classList.remove('apple');
         elementOfNewHeadCoords.classList.add('snake-head');
         head.classList.add('snake');
@@ -111,10 +118,16 @@ function moveSnake(snakeDirection) {
 
 function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
-        ;
-        // ide kell egy game over
-        // felajánlja a kövi játékot
+        let h1 = document.querySelector('h1');
+        h1.textContent = 'Game over!';
+        gameOverSound.src = 'static/sfx/game_over.wav';
+        gameOverSound.play();
+        clearInterval(gameInterval)
     }
+}
+
+function gameOver() {
+    ;
 }
 
 function createBoard(globalRow, globalCol){
