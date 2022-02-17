@@ -1,14 +1,15 @@
 let snake = [getSnakeCoordinates(7, 0),
                 getSnakeCoordinates(7, 1),
                 getSnakeCoordinates(7, 2)]
-
+let intervalTime = 500;
 let snakeDirection = 'right';
 let score = 0;
 let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
-let gameInterval = {}
+let gameInterval = {};
+let clock = {};
 
 let gameOverSound = document.querySelector('#gameOver');
 let appleSound = document.querySelector('#appleSound');
@@ -39,7 +40,7 @@ function startGame() {
             }})
     let intervalTime = 500;
     gameInterval = setInterval(() => moveSnake(snakeDirection), intervalTime);
-    setInterval(function (){
+    clock = setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
         counter++;
         }
@@ -128,8 +129,9 @@ function gameOver() {
     h1.textContent = 'Game over!';
     gameOverSound.src = 'static/sfx/game_over.wav';
     gameOverSound.play();
-    clearInterval(gameInterval)
-    createMenu()
+    clearInterval(gameInterval);
+    clearInterval(clock);
+    createMenu();
 }
 
 
