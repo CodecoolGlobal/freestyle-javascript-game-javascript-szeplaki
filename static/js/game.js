@@ -87,14 +87,7 @@ function moveSnake(snakeDirection) {
         document.getElementById('score').textContent = 'Score: ' + score.toString();
         head.classList.remove('snake-head');
         let appleCoords = dropAppleOnBoard(globalRow, globalCol);
-        let coordsToCheck = document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`);
-        if (coordsToCheck.classList.contains('snake') || coordsToCheck.classList.contains('snake-tail')) {
-            while (coordsToCheck.classList.contains('snake') === true || coordsToCheck.classList.contains('snake-tail') === true) {
-                dropAppleOnBoard(globalRow, globalCol);
-            }
-        } else {
-            document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
-        }
+        document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
     } else {
         let middles = document.querySelectorAll("[data-id]");
         let array = []
@@ -324,11 +317,11 @@ function removeCredits(){
 }
 
 function dropAppleOnBoard(globalRow, globalCol){
-    const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;
-    const rnd_row = Math.floor(Math.random() * (globalRow-1)) + 0;
+    let fields = document.querySelectorAll('td.cell:not(td.snake, td.snake-head, td-snake-tail)');
+    let randomAppleElement = fields[Math.floor(Math.random()*fields.length)];
     let appleCoords = {
-        appleRow: rnd_row,
-        appleCol: rnd_col
+        appleRow: randomAppleElement.dataset.row,
+        appleCol: randomAppleElement.dataset.col
     }
     return appleCoords;
 }
