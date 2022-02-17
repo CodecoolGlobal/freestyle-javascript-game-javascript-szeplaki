@@ -83,6 +83,8 @@ function moveSnake(snakeDirection) {
         head.classList.add('snake');
         head.dataset.id = counterDataId.toString();
         counterDataId++;
+        score += 100;
+        document.getElementById('score').textContent = 'Score: ' + score.toString();
         head.classList.remove('snake-head');
         let appleCoords = dropAppleOnBoard(globalRow, globalCol);
         let coordsToCheck = document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`);
@@ -148,6 +150,7 @@ function createBoard(globalRow, globalCol){
     let displayScore = document.createElement('div');
     displayScore.className = 'Score';
     let pTag = document.createElement('p');
+    pTag.setAttribute('id', 'score');
     pTag.textContent = 'Score: ' + score.toString();
     displayScore.appendChild(pTag);
     let center = document.createElement('center');
