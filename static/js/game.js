@@ -26,16 +26,28 @@ function startGame() {
     document.addEventListener('keydown', function(e) {
             switch (e.keyCode) {
                 case 37:
-                    snakeDirection = 'left'
+                    if (snakeDirection === "right") {
+                    snakeDirection = "right";
+                    } else {
+                    snakeDirection = 'left'};
                     break;
                 case 38:
-                    snakeDirection = 'up'
+                    if (snakeDirection === "down") {
+                    snakeDirection = "down";
+                    } else {
+                    snakeDirection = 'up'};
                     break;
                 case 39:
-                    snakeDirection = 'right'
+                    if (snakeDirection === "left") {
+                    snakeDirection = "left";
+                    } else {
+                    snakeDirection = 'right'};
                     break;
                 case 40:
-                    snakeDirection = 'down'
+                    if (snakeDirection === "up") {
+                    snakeDirection = "up";
+                    } else {
+                    snakeDirection = 'down'};
                     break;
             }})
     let intervalTime = 500;
@@ -53,6 +65,7 @@ function getSnakeCoordinates(row, col) {
 
 
 function moveSnake(snakeDirection) {
+    console.log(snakeDirection)
     let head = document.getElementsByClassName('snake-head')[0];
     let tail = document.getElementsByClassName('snake-tail')[0];
     let head_row = Number(head.dataset.row)
@@ -88,14 +101,7 @@ function moveSnake(snakeDirection) {
         document.getElementById('score').textContent = 'Score: ' + score.toString();
         head.classList.remove('snake-head');
         let appleCoords = dropAppleOnBoard(globalRow, globalCol);
-        let coordsToCheck = document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`);
-        if (coordsToCheck.classList.contains('snake') || coordsToCheck.classList.contains('snake-tail')) {
-            while (coordsToCheck.classList.contains('snake') === true || coordsToCheck.classList.contains('snake-tail') === true) {
-                dropAppleOnBoard(globalRow, globalCol);
-            }
-        } else {
-            document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
-        }
+        document.querySelector(`[data-row="${appleCoords.appleRow}"][data-col="${appleCoords.appleCol}"]`).classList.add('apple');
     } else {
         let middles = document.querySelectorAll("[data-id]");
         let array = []
@@ -332,11 +338,11 @@ function removeCredits(){
 }
 
 function dropAppleOnBoard(globalRow, globalCol){
-    const rnd_col = Math.floor(Math.random() * (globalCol-1)) + 0;
-    const rnd_row = Math.floor(Math.random() * (globalRow-1)) + 0;
+    let fields = document.querySelectorAll('td.cell:not(td.snake, td.snake-head, td-snake-tail)');
+    let randomAppleElement = fields[Math.floor(Math.random()*fields.length)];
     let appleCoords = {
-        appleRow: rnd_row,
-        appleCol: rnd_col
+        appleRow: randomAppleElement.dataset.row,
+        appleCol: randomAppleElement.dataset.col
     }
     return appleCoords;
 }
