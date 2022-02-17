@@ -109,7 +109,6 @@ function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
         let h1 = document.querySelector('h1');
         h1.textContent = 'Game over!';
-        h1.style.textAlign = 'center';
         // ide kell egy game over
         // felajánlja a kövi játékot
     }
@@ -278,7 +277,7 @@ function displayCredit(){
     credits.append(btnContainer)
     document.body.appendChild(credits);
     let creators = ['Creators of JavaSnake',
-               'Éva Száplaki',
+               'Éva Széplaki',
                'Barbara Szabó-Huszár',
                'Bálint Vitai',
                'Gyula Borbély',
