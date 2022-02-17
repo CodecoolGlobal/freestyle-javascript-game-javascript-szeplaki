@@ -8,6 +8,7 @@ let counter = 0;
 let counterDataId = 1;
 let globalRow = 15;
 let globalCol = 15;
+let gameInterval = {}
 
 function initSnake(snake) {
         document.querySelector(`[data-row="${snake[0].row}"][data-col="${snake[0].col}"]` ).classList.add('snake-tail');
@@ -34,7 +35,7 @@ function startGame() {
                     break;
             }})
     let intervalTime = 500;
-    setInterval(() => moveSnake(snakeDirection), intervalTime);
+    gameInterval = setInterval(() => moveSnake(snakeDirection), intervalTime);
     setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
         counter++;
@@ -109,6 +110,7 @@ function checkWall(row, col){
     if (row === globalRow || col === globalCol || row === -1 || col === -1) {
         let h1 = document.querySelector('h1');
         h1.textContent = 'Game over!';
+        clearInterval(gameInterval)
         // ide kell egy game over
         // felajánlja a kövi játékot
     }
