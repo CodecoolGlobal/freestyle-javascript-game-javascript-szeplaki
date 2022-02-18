@@ -1,0 +1,93 @@
+body {
+    background-color: black;
+}
+.container-1{
+    display: grid;
+    justify-content: center;
+}
+
+.header-1 h1 {
+    display: flex;
+    justify-content: center;
+    color: deeppink;
+}
+
+.header-2 h2 {
+    display: flex;
+    justify-content: center;
+    color: deeppink;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+}
+
+.username input {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+.password {
+    display: flex;
+    justify-content: center;
+}
+
+.password input {
+    position: relative;
+    top: 25px;
+    border-radius: 5%;
+    padding: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.button button {
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+    margin-top: 5rem;
+}
+
+.button button:hover {
+    background-color: deeppink;
+    color: black;
+}
+
+.error-1 {
+    display: flex;
+    justify-content: center;
+}
+
+.error-1 p {
+    color: deeppink;
+}
+
+.error-2 {
+    display: flex;
+    justify-content: center;
+    animation: fade-out 4s;
+}
+
+.error-2 p {
+    color: deeppink;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+
+}
+

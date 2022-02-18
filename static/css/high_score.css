@@ -1,0 +1,48 @@
+body {
+    background-color: black;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    color: deeppink;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    padding-right: 10px;
+}
+.table tr {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    padding: 10px;
+    font-size: 25px;
+    color: deeppink;
+
+}
+
+.table tr th {
+    position: relative;
+    left: 20px;
+}
+
+#index {
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+    margin-top: 5rem;
+}
+
+.back_to_main {
+    display: flex;
+    justify-content: center;
+}
+
+#index:hover {
+    background-color: deeppink;
+    color: black;
+}

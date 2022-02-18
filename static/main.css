@@ -90,7 +90,7 @@ body {
 
 .container {
     animation: fade-out 4s;
-    animation-iteration-count: 9;
+    animation-iteration-count: 8;
 }
 
 .hidden-button {
@@ -121,5 +121,28 @@ h1 {
     color: deeppink;
 }
 .Score {
+    color: deeppink;
+}
+
+.highScoreDiv {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+#tryAgain {
+    background-color: black;
+    color: deeppink;
+    border: none;
+    font-size: 30px;
+    border-radius: 30%;
+}
+
+#tryAgain:hover {
+    background-color: deeppink;
+    color: black;
+}
+
+.h1 {
     color: deeppink;
 }

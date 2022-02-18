@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration page</title>
-    <link rel="stylesheet" href="/static/css/registration.css">
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
     <form action="{{ url_for('register_user') }}" method="post">
@@ -19,10 +19,10 @@
                 </h2>
             </div>
             <div class="username">
-                <input type="text" name="username">
+                <input type="text" name="username" placeholder="username">
             </div>
             <div class="password">
-                <input type="text" name="password">
+                <input type="text" name="password" placeholder="password">
             </div>
             <div class="button">
                 <button type="submit">Register</button>

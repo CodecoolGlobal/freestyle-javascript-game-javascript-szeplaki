@@ -50,7 +50,6 @@ function startGame() {
                     snakeDirection = 'down'};
                     break;
             }})
-    let intervalTime = 500;
     gameInterval = setInterval(() => moveSnake(snakeDirection), intervalTime);
     clock = setInterval(function (){
          document.getElementById('counter').innerHTML = 'Time: ' + counter.toString();
@@ -58,6 +57,7 @@ function startGame() {
         }
         , 1000);
 }
+
 
 function getSnakeCoordinates(row, col) {
     return {row:row, col:col}
@@ -140,6 +140,7 @@ function checkSnake(elementOfNewHeadCoords) {
 function gameOver() {
     let h1 = document.querySelector('h1');
     h1.textContent = 'Game over!';
+    h1.className = 'h1';
     gameOverSound.src = 'static/sfx/game_over.wav';
     gameOverSound.play();
     clearInterval(gameInterval);
@@ -268,17 +269,23 @@ function removeMenu() {
 }
 
 function saveHighScore(){
+    let div = document.createElement('div');
+    div.className = 'highScoreDiv';
     let formToSend = document.createElement('form');
     formToSend.action = '/high-score';
     formToSend.method = 'POST';
     let inputScore = document.createElement('input');
+    inputScore.type = 'hidden';
     let button = document.createElement('button');
     button.type = 'submit';
+    button.id = 'tryAgain';
+    button.textContent = 'Try Again';
     inputScore.name = 'score_to_send';
     inputScore.id = 'score_to_send';
     formToSend.append(inputScore);
     formToSend.append(button);
-    document.body.appendChild(formToSend)
+    div.append(formToSend);
+    document.body.appendChild(div);
     inputScore.value = score.toString();
 }
 
